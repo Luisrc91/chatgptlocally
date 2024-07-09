@@ -4,11 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Local Chatgpt</title>
+    <link rel="stylesheet" href="./main.css">
+
   </head>
   <body>
     <main>
       <ul>
-        <li>
+        <li class="message user">
           <span>GPT</span>
           <span>Bot answer.</span>
         </li>
@@ -24,9 +26,18 @@
         </li>
       </ul>
     </main>
+
     <form>
       <input type="text" name="message" placeholder="Message ChatGpt" />
       <button>Send</button>
     </form>
+
+    <template id="message-template">
+      <li class="message">
+        <span></span>
+        <span></span>
+      </li>
+    </template>
+
   </body>
 </html>
