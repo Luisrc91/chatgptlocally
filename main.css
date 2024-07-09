@@ -35,7 +35,7 @@ ul{
     gap:4px;
     margin:4px 0;
     padding :4px 8px;
-    > span:first-child{
+    > span{
         width: 36px;
         height: 36px;
         background: #eee;
@@ -46,20 +46,20 @@ ul{
         align-items: center;
         border-radius: 99px;
     }
-    >span:last-child {
+    p{
         border-radius: 4px;
         padding: 4px 5px;
     }
     &.user{
         align-items: flex-end;
         align-self: flex-end;
-        span {
+        span, p {
             background: rgb(219, 236, 255);
         }
     }
     &.bot{
         align-self:  flex-start;
-        span{
+        span, p{
             background: rgb(187, 240, 187);
         }
     }
