@@ -49,6 +49,7 @@ ul{
     p{
         border-radius: 4px;
         padding: 4px 5px;
+        margin-top:8px
     }
     &.user{
         align-items: flex-end;
@@ -64,4 +65,27 @@ ul{
         }
     }
 
+}
+
+form{
+    display: flex;
+    input{
+        border-radius: 99px;
+        flex-grow: 1;
+        border: 0;
+        padding: 8px;
+        margin-right: 8px;
+        border: 1px solid #ccc;
+    }
+    button{
+        background: #09f;
+        border:0;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+        &:hover{
+            background: rgb(0, 120, 201) ;
+        }
+
+    }
 }
