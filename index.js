@@ -1,8 +1,6 @@
 import { CreateMLCEngine } from "https://esm.run/@mlc-ai/web-llm";
 
-
 const $ = (el) => document.querySelector(el);
-
 
 const $form = $("form");
 const $input = $("input");
@@ -14,22 +12,18 @@ const $info = $("small");
 
 let messages = [];
 
-const SELECTED_MODEL = 'gemma-2b-it-q4f32_1-MLC'
-const engine = await CreateMLCEngine(
-    SELECTED_MODEL,
-    {
-        initProgressCallback:(info)=>{
-            console.log('initProgressCallback', info)
-            $info.textContent = `${info.text}%`
-            if (info.progress == 1) {
-                $button.removeAttribute('disabled')
-            }
-            
-        }
+const SELECTED_MODEL = "gemma-2b-it-q4f32_1-MLC";
+const engine = await CreateMLCEngine(SELECTED_MODEL, {
+  initProgressCallback: (info) => {
+    console.log("initProgressCallback", info);
+    $info.textContent = `${info.text}%`;
+    if (info.progress == 1) {
+      $button.removeAttribute("disabled");
     }
-)
+  },
+});
 
-$form.addEventListener("submit", (event) => {
+$form.addEventListener("submit", async (event) => {
   event.preventDefault();
   const messageText = $input.value.trim();
 
@@ -39,12 +33,26 @@ $form.addEventListener("submit", (event) => {
 
   addMessage(messageText, "user");
   $button.setAttribute("disabled", true);
+  const userMessage = {
+    role: "user",
+    content: messageText,
+  };
+  messages.push(userMessage);
 
-  setTimeout(() => {
-    addMessage("Hello, How are your?", "bot");
-    $button.removeAttribute("disabled");
-  }, 200);
+  const reply = await engine.chat.completions.create({
+    messages,
+  });
+  //   console.log(reply.choices[0].message)
+  // const botMessage = reply.choices[0].message
+  $button.removeAttribute('disabled')
+  const botMessage = reply.choices[0].message;
+  messages.push(botMessage);
+  addMessage(botMessage.content, "bot");
 });
+//   setTimeout(() => {
+//     addMessage("Hello, How are your?", "bot");
+//     $button.removeAttribute("disabled");
+//   }, 200);
 
 function addMessage(text, sender) {
   const clonedTemplate = $template.content.cloneNode(true);
