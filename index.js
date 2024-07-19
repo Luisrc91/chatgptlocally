@@ -1,4 +1,17 @@
+import { CreateMLCEngine } from "https://esm.run/@mlc-ai/web-llm";
+
+const SELECTED_MODEL = 'gemma-2b-it-q4f32_1-MLC'
+const engine = await CreateMLCEngine(
+    SELECTED_MODEL,
+    {
+        initProgressCallback:(info)=>{
+            console.log('initProgressCallback', info)
+        }
+    }
+)
+
 const $ = (el) => document.querySelector(el);
+
 
 const $form = $("form");
 const $input = $("input");
