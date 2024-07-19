@@ -20,6 +20,7 @@ main {
     padding: 8px;
     margin-bottom: 16px;
     overflow-y:auto;
+    scroll-behavior: smooth;
 }
 
 ul{

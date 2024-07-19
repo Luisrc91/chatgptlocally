@@ -13,7 +13,7 @@ $form.addEventListener("submit", (event) => {
 
   if (messageText !== "") {
     $input.value = "";
-    addMessage(messageText, 'user');
+    addMessage(messageText, "user");
   }
 });
 
@@ -29,4 +29,5 @@ function addMessage(text, sender) {
   $newMessage.classList.add(sender);
 
   $message.appendChild($newMessage);
+  $container.scrollTop = $container.scrollHeight;
 }
