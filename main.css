@@ -84,6 +84,13 @@ form{
         color: white;
         border-radius: 6px;
         cursor: pointer;
+        transition: background .3s ease;
+
+        &[disabled]{
+            background: #ccc;
+            opacity: .6;
+            pointer-events: none;
+        }
         &:hover{
             background: rgb(0, 120, 201) ;
         }

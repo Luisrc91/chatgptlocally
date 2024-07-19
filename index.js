@@ -13,8 +13,15 @@ $form.addEventListener("submit", (event) => {
 
   if (messageText !== "") {
     $input.value = "";
-    addMessage(messageText, "user");
   }
+
+  addMessage(messageText, "user");
+  $button.setAttribute("disabled", true);
+
+  setTimeout(() => {
+    addMessage("Hello, How are your?", "bot");
+    $button.removeAttribute("disabled");
+  }, 200);
 });
 
 function addMessage(text, sender) {
