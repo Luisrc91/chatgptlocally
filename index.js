@@ -32,22 +32,27 @@ $form.addEventListener("submit", async (event) => {
   }
 
   addMessage(messageText, "user");
-  $button.setAttribute("disabled", true);
+  $button.setAttribute("disabled", "");
   const userMessage = {
     role: "user",
     content: messageText,
   };
   messages.push(userMessage);
 
-  const reply = await engine.chat.completions.create({
+  const chunks = await engine.chat.completions.create({
     messages,
+    stream: true,
   });
+  let reply = ''
+   for await (const chunk of chunks) {
+    console.log(chunk.choices)
+   }
   //   console.log(reply.choices[0].message)
   // const botMessage = reply.choices[0].message
-  $button.removeAttribute('disabled')
-  const botMessage = reply.choices[0].message;
-  messages.push(botMessage);
-  addMessage(botMessage.content, "bot");
+  $button.removeAttribute("disabled");
+//   const botMessage = reply.choices[0].message;
+//   messages.push(botMessage);
+//   addMessage(botMessage.content, "bot");
 });
 //   setTimeout(() => {
 //     addMessage("Hello, How are your?", "bot");
