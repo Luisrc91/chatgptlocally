@@ -43,17 +43,31 @@ $form.addEventListener("submit", async (event) => {
     messages,
     stream: true,
   });
-  let reply = ''
-   for await (const chunk of chunks) {
-    console.log(chunk.choices)
-   }
-  //   console.log(reply.choices[0].message)
-  // const botMessage = reply.choices[0].message
+  let reply = "";
+
+  const $botMessage = addMessage("", "bot");
+
+  for await (const chunk of chunks) {
+    const choice = chunk.choices[0];
+    const content = choice?.delta?.content ?? "";
+    reply += content;
+    $botMessage.textContent = reply;
+    // console.log(chunk.choices)
+  }
   $button.removeAttribute("disabled");
+
+  messages.push({
+    role: "assistant",
+    content: reply,
+  });
+});
+// console.log(chunk.choices)
+
+//   console.log(reply.choices[0].message)
+// const botMessage = reply.choices[0].message
 //   const botMessage = reply.choices[0].message;
 //   messages.push(botMessage);
 //   addMessage(botMessage.content, "bot");
-});
 //   setTimeout(() => {
 //     addMessage("Hello, How are your?", "bot");
 //     $button.removeAttribute("disabled");
@@ -72,4 +86,6 @@ function addMessage(text, sender) {
 
   $message.appendChild($newMessage);
   $container.scrollTop = $container.scrollHeight;
+
+  return $text;
 }
