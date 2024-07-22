@@ -15,7 +15,7 @@ let messages = [];
 const SELECTED_MODEL = "gemma-2b-it-q4f32_1-MLC";
 const engine = await CreateMLCEngine(SELECTED_MODEL, {
   initProgressCallback: (info) => {
-    console.log("initProgressCallback", info);
+    // console.log("initProgressCallback", info);
     $info.textContent = `${info.text}%`;
     if (info.progress == 1) {
       $button.removeAttribute("disabled");
